@@ -1,11 +1,15 @@
 const Modal = {
-    open(){
+    open(title='Nova Transação'){
     //abrir modal
     //adicionar a classe "active" ao modal
     document
         .querySelector('.modal-overlay')
         .classList
         .add('active')
+
+    document
+        .getElementById('title_transaction')
+        .innerHTML = title
     },
 
     close(){
@@ -15,6 +19,8 @@ const Modal = {
         .querySelector('.modal-overlay')
         .classList
         .remove('active')
+        
+        Form.clearFields()
     }
 }
 
@@ -41,6 +47,11 @@ const Transaction = {
 
     remove(index){
         Transaction.all.splice(index, 1)
+        App.reload()
+    },
+
+    update(transaction,index){
+        Transaction.all[index] = transaction
         App.reload()
     },
 
@@ -89,6 +100,12 @@ const DOM = {
         DOM.transacitonsContainer.appendChild(tr)
     },
 
+    updateTransaction(index){
+        const valueToUpdate = Transaction.all.filter((item,idx) => index === idx)[0]
+        Form.setValues(valueToUpdate.description,Utils.formatUpdateAmount(valueToUpdate.amount),Utils.formatUpdateDate(valueToUpdate.date),index)
+        Modal.open('Alterar Transação')
+    },
+
     innerHTMLTransaction(transaction, index){
         
         //muda a classe (cor) do CSS se valor que veio foi positivo ou negativo
@@ -102,6 +119,7 @@ const DOM = {
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
+                <img onclick="DOM.updateTransaction(${index})" src="./assets/pencil.svg" alt="Alterar transação">
                 <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação">
             </td>
         `
@@ -131,9 +149,19 @@ const Utils = {
         return Math.round(value)
     },
 
+    formatUpdateAmount(value){
+        value = value / 100
+        return value.toFixed(2)
+    },
+
     formatDate(date){
         const splittedDate = date.split("-")
         return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+    },
+
+    formatUpdateDate(date){
+        const splittedDate = date.split("/")
+        return `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`
     },
 
     formatCurrency(value){
@@ -156,6 +184,7 @@ const Form = {
     description: document.querySelector('input#description'),
     amount: document.querySelector('input#amount'),
     date: document.querySelector('input#date'),
+    id: document.querySelector('input#id_transaction'),
 
     getValues(){
         return {
@@ -163,6 +192,13 @@ const Form = {
             amount: Form.amount.value,
             date: Form.date.value
         }
+    },
+
+    setValues(description, amount, date, id){
+            Form.description.value = description
+            Form.amount.value = amount
+            Form.date.value = date
+            Form.id.value = id
     },
 
     validateFields(){
@@ -190,11 +226,14 @@ const Form = {
         Form.description.value = ""
         Form.amount.value = ""
         Form.date.value = ""
+        Form.id.value = ""
     },
 
     submit(event){
         //interrompe comportamento padrao do form que é enviar dados
         event.preventDefault()
+
+        id = document.getElementById('id_transaction').value
 
         try {
             //verificar se todas as informacoes foram preenchidas
@@ -203,8 +242,13 @@ const Form = {
             //formatar os dados para salvar
             const transaction = Form.formatValues()
             
-            //salvar
-            Transaction.add(transaction)
+
+            if(id != ''){
+                Transaction.update(transaction,id)                
+            }else{
+                //salvar
+                Transaction.add(transaction)
+            }
             
             //apagar os dados do formulario
             Form.clearFields()
