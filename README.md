@@ -2,6 +2,13 @@
     <img alt="Logo dev.finances" src="assets/logo2.svg">
 </p>
 
+<p align="center">
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-licença">Licença</a>
+</p>
+
 <br/>
 
 <p align="center">
@@ -35,11 +42,13 @@ Visualize o layout do projeto através [desse link](https://www.figma.com/file/7
 ## 📝 LICENÇA
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
-
 <br/>
+
 ---
 
-Feito por Fernando Oliveira Lopes durante a Primeira Edição da Maratona Discover, da Rocketseat, que ocorreu de 14/01/2021 à 04/02/2021.
+<p align="justify">
+    Feito por Fernando Oliveira Lopes durante a Primeira Edição da Maratona Discover, da Rocketseat, que ocorreu de 14/01/2021 à 04/02/2021.
+</p>
 
 Visite: 
 <br/>
