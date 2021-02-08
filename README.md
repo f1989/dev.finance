@@ -29,7 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 PROJETO
 
-O dev.finance$ é uma aplicação Web de controle financeiro, onde é possível cadastrar, editar e excluir transações (contendo descrião, valor e data) e ver o saldo de entrada, saída e total acumulado.
+O dev.finance$ é uma aplicação Web de controle financeiro, onde é possível cadastrar, editar e excluir transações (contendo descrição, valor e data) e ver o saldo de entrada, saída e total acumulado.
 
 <br/>
 
